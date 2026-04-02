@@ -1,0 +1,19 @@
+runsPerModel: 3
+maxIterationsPerPrompt: 5
+stuckThreshold: 3
+
+validation:
+  npmInstallTimeoutMs: 120000
+  buildTimeoutMs: 120000
+  devServerStartupMs: 15000
+  browserCheckTimeoutMs: 30000
+  screenshotOnFailure: true
+  screenshotOnSuccess: false
+
+reviewers:
+  - name: "Sonnet4.6"
+    provider: "anthropic"
+    modelId: "claude-sonnet-4-6"
+  - name: "GPT-5.4"
+    provider: "openai"
+    modelId: "gpt-5.4"

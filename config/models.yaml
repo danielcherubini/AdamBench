@@ -1,0 +1,23 @@
+models:
+  - name: "Qwen3.5-122b-A10b"
+    provider: "llama-server"
+    baseUrl: "http://192.168.1.100:8080/v1"
+    modelId: "local-model"
+    apiKey: "not-needed"
+    contextWindow: 32768
+    maxTokens: 16384
+    reasoning: false
+    compat:
+      supportsDeveloperRole: false
+      supportsReasoningEffort: false
+  - name: "gpt-oss-120b"
+    provider: "llama-server"
+    baseUrl: "http://192.168.1.100:8080/v1"
+    modelId: "local-model"
+    apiKey: "not-needed"
+    contextWindow: 32768
+    maxTokens: 16384
+    reasoning: false
+    compat:
+      supportsDeveloperRole: false
+      supportsReasoningEffort: false

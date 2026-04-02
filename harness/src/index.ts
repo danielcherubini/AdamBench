@@ -1,2 +1,2 @@
-console.log("adambench-harness");
+console.log("adambench harness");
 process.exit(0);
