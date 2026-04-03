@@ -28,6 +28,7 @@ export interface BenchmarkSettings {
   resultsDir: string; // Default "../results"
   validation: ValidationSettings;
   reviewers: ReviewerConfig[];
+  resume?: boolean; // Default false
 }
 
 export interface ValidationSettings {
