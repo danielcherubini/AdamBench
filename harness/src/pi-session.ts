@@ -27,6 +27,7 @@ function sanitizeArgs(args: Record<string, any>): Record<string, any> {
 export class BenchmarkSession {
   private session: any;
   private _sessionFile: string;
+  private modelConfig: ModelConfig;
   private projectDir: string;
   private sessionDir: string;
   private bareAgentDir: string;
@@ -41,6 +42,7 @@ export class BenchmarkSession {
     providerName: string;
     promptTimeoutMs?: number;
   }) {
+    this.modelConfig = options.modelConfig;
     this.projectDir = options.projectDir;
     this.sessionDir = options.sessionDir;
     this.bareAgentDir = options.bareAgentDir;
@@ -63,9 +65,9 @@ export class BenchmarkSession {
     );
 
     // 3. Find the model using the DERIVED provider name (not the YAML provider field)
-    const model = modelRegistry.find(this.providerName, "local-model");
+    const model = modelRegistry.find(this.providerName, this.modelConfig.modelId);
     if (!model) {
-      throw new Error(`Model not found: ${this.providerName}/local-model`);
+      throw new Error(`Model not found: ${this.providerName}/${this.modelConfig.modelId}`);
     }
 
     // 4. Bare resource loader — points at the empty bareAgentDir
