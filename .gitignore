@@ -3,10 +3,29 @@ harness/src/*.js
 harness/src/*.d.ts
 harness/src/*.js.map
 harness/src/*.d.ts.map
+harness/dist/
 projects/**/src/*.js
 projects/**/src/*.d.ts
 projects/**/src/*.js.map
 projects/**/src/*.d.ts.map
 
-# Dependencies (use npm ci instead)
+# Dependencies
 node_modules/
+harness/node_modules/
+
+# Generated files
+harness/models.json
+
+# Benchmark run outputs
+runs/
+review_outputs_v2/
+results/
+
+# Playwright
+harness/test-results/
+harness/playwright-report/
+
+# OS / editor
+.DS_Store
+*.swp
+.env
