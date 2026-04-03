@@ -26,7 +26,7 @@ function sanitizeArgs(args: Record<string, any>): Record<string, any> {
 
 export class BenchmarkSession {
   private session: any;
-  private sessionFile: string;
+  private _sessionFile: string;
   private projectDir: string;
   private sessionDir: string;
   private bareAgentDir: string;
@@ -46,7 +46,7 @@ export class BenchmarkSession {
     this.bareAgentDir = options.bareAgentDir;
     this.providerName = options.providerName;
     this.promptTimeoutMs = options.promptTimeoutMs ?? 30 * 60 * 1000; // 30 minutes default
-    this.sessionFile = path.join(this.sessionDir, "session.jsonl");
+    this._sessionFile = path.join(this.sessionDir, "session.jsonl");
   }
 
   /**
@@ -90,7 +90,7 @@ export class BenchmarkSession {
       authStorage,
       modelRegistry,
       resourceLoader: loader,
-      sessionManager: SessionManager.create(this.sessionFile),
+      sessionManager: SessionManager.create(this._sessionFile),
       settingsManager,
     });
 
@@ -208,7 +208,7 @@ export class BenchmarkSession {
    * Absolute path to the session.jsonl file
    */
   get sessionFile(): string {
-    return this.sessionFile;
+    return this._sessionFile;
   }
 
   /**
