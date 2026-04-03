@@ -75,6 +75,16 @@ export function loadSettings(yamlPath: string, repoRoot: string): BenchmarkSetti
     }
 
     // W2: Correct default logic using nullish coalescing (??)
+    const validationDefaults: ValidationSettings = {
+      npmInstallTimeoutMs: (validationData as any).npmInstallTimeoutMs ?? 120000,
+      buildTimeoutMs: (validationData as any).buildTimeoutMs ?? 120000,
+      devServerStartupMs: (validationData as any).devServerStartupMs ?? 15000,
+      browserCheckTimeoutMs: (validationData as any).browserCheckTimeoutMs ?? 30000,
+      // Corrected default logic
+      screenshotOnFailure: (validationData as any).screenshotOnFailure ?? true,
+      screenshotOnSuccess: (validationData as any).screenshotOnSuccess ?? false,
+    };
+
     const settings: BenchmarkSettings = {
       runsPerModel: data.runsPerModel ?? 3,
       maxIterationsPerPrompt: data.maxIterationsPerPrompt ?? 5,
@@ -84,15 +94,7 @@ export function loadSettings(yamlPath: string, repoRoot: string): BenchmarkSetti
       outputDir: path.resolve(repoRoot, 'runs'),
       reviewOutputDir: path.resolve(repoRoot, 'review_outputs_v2'),
       resultsDir: path.resolve(repoRoot, 'results'),
-      validation: {
-        npmInstallTimeoutMs: validationData.npmInstallTimeoutMs ?? 120000,
-        buildTimeoutMs: validationData.buildTimeoutMs ?? 120000,
-        devServerStartupMs: validationData.devServerStartupMs ?? 15000,
-        browserCheckTimeoutMs: validationData.browserCheckTimeoutMs ?? 30000,
-        // Corrected default logic
-        screenshotOnFailure: validationData.screenshotOnFailure ?? true,
-        screenshotOnSuccess: validationData.screenshotOnSuccess ?? false,
-      },
+      validation: validationDefaults,
       reviewers: reviewerData.map(r => ({
         name: r.name,
         provider: r.provider,
