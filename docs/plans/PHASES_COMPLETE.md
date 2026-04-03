@@ -63,10 +63,11 @@
 
 ## Summary
 
-Phases 1 and 2 are now **COMPLETE**. The harness has:
+Phases 1, 2, and 3 are now **COMPLETE**. The harness has:
 - Full scaffolding with TypeScript configuration
 - Complete type definitions for all v1 and v2 data models
 - Configuration loading with YAML parsing and validation
 - Pi models.json generation with provider name derivation
+- Pi SDK session wrapper with metrics collection (token usage, tool calls, timing)
 
-The harness is ready for Phase 3 (Pi SDK session wrapper) development.
+The harness is ready for Phase 6 (Runner orchestrator) development.
