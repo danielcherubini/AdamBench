@@ -1,1 +1,12 @@
-/harness/node_modules
+# Compiled output
+harness/src/*.js
+harness/src/*.d.ts
+harness/src/*.js.map
+harness/src/*.d.ts.map
+projects/**/src/*.js
+projects/**/src/*.d.ts
+projects/**/src/*.js.map
+projects/**/src/*.d.ts.map
+
+# Dependencies (use npm ci instead)
+node_modules/

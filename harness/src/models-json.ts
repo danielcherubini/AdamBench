@@ -23,13 +23,15 @@ export function deriveProviderName(model: ModelConfig): string {
 }
 
 /**
- * Converts an array of ModelConfig into Pi's models.json format, generating a providerMap.
+ * Converts an array of ModelConfig into Pi's providers-keyed models.json format.
  * @param models Array of ModelConfig objects.
  * @returns An object containing the JSON structure and the provider map.
  */
 export function generateModelsJson(models: ModelConfig[]): { json: object; providerMap: Map<string, string> } {
-  const modelsArray: any[] = [];
   const providerMap = new Map<string, string>();
+
+  // Build providers object with nested models array
+  const providers: Record<string, any> = {};
 
   for (const model of models) {
     const derivedProviderName = deriveProviderName(model);
@@ -37,27 +39,30 @@ export function generateModelsJson(models: ModelConfig[]): { json: object; provi
     // Map original name to derived provider name
     providerMap.set(model.name, derivedProviderName);
 
-    // Construct the model object for Pi's format
-    const piModelEntry = {
-      name: model.name,
-      provider: derivedProviderName, // Use the derived name
-      modelId: model.modelId,
-      // Add other necessary fields if Pi SDK expects them, otherwise keep it minimal
-      // Based on task description, we map the YAML fields to the required structure.
-      // Assuming Pi SDK expects name, provider, modelId, and perhaps baseUrl/apiKey structure if needed later.
-      // For now, we map what we have, ensuring 'provider' is derived.
-      baseUrl: model.baseUrl,
-      apiKey: model.apiKey,
-      contextWindow: model.contextWindow,
-      maxTokens: model.maxTokens,
-      reasoning: model.reasoning,
-      compat: model.compat,
-    };
+    // Initialize provider if not exists
+    if (!providers[derivedProviderName]) {
+      providers[derivedProviderName] = {
+        baseUrl: model.baseUrl,
+        api: "openai-completions",
+        apiKey: model.apiKey,
+        compat: model.compat || {},
+      };
+    }
 
-    modelsArray.push(piModelEntry);
+    // Add model to provider's models array
+    if (!providers[derivedProviderName].models) {
+      providers[derivedProviderName].models = [];
+    }
+    providers[derivedProviderName].models.push({
+      id: model.modelId,
+      name: model.name,
+      contextWindow: model.contextWindow,
+      maxTokens: model.maxTokens || 16384,
+      reasoning: model.reasoning || false,
+    });
   }
 
-  return { json: { models: modelsArray }, providerMap };
+  return { json: { providers }, providerMap };
 }
 
 /**

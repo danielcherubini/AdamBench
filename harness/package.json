@@ -1,23 +1,12 @@
 {
-  "name": "adambench-harness",
-  "type": "module",
-  "private": true,
+  "name": "harness",
+  "version": "1.0.0",
   "dependencies": {
     "@mariozechner/pi-coding-agent": "0.64.0",
     "@mariozechner/pi-ai": "0.64.0",
     "playwright": "^1.0.0",
     "commander": "^12.0.0",
-    "yaml": "^2.0.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.0",
-    "tsx": "^4.0.0",
-    "@types/node": "^20.0.0"
-  },
-  "scripts": {
-    "start": "tsx src/index.ts",
-    "benchmark": "tsx src/index.ts benchmark",
-    "review": "tsx src/index.ts review",
-    "score": "tsx src/index.ts score"
+    "yaml": "^2.0.0",
+    "tree-kill": "^1.2.2"
   }
 }
