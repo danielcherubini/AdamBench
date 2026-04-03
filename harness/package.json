@@ -1,6 +1,12 @@
 {
   "name": "harness",
   "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "lint": "tsc --noEmit",
+    "build": "tsc",
+    "start": "tsx src/index.ts"
+  },
   "dependencies": {
     "@mariozechner/pi-coding-agent": "0.64.0",
     "@mariozechner/pi-ai": "0.64.0",
@@ -8,5 +14,10 @@
     "commander": "^12.0.0",
     "yaml": "^2.0.0",
     "tree-kill": "^1.2.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0",
+    "@types/node": "^20.0.0"
   }
 }
