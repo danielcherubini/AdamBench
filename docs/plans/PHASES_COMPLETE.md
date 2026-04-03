@@ -70,4 +70,12 @@ Phases 1, 2, and 3 are now **COMPLETE**. The harness has:
 - Pi models.json generation with provider name derivation
 - Pi SDK session wrapper with metrics collection (token usage, tool calls, timing)
 
+**Phase 3 implementation details:**
+- `BenchmarkSession` class with `init()`, `sendPrompt()`, and `dispose()` methods
+- Token usage accumulated across all turns (not just last turn)
+- Generation time excludes tool execution wait time
+- Per-prompt timeout (30 minutes default)
+- Tool call records stamped with `promptNumber` and `iteration`
+- Session file saved to `sessionDir/session.jsonl`
+
 The harness is ready for Phase 6 (Runner orchestrator) development.
